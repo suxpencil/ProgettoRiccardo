@@ -1,0 +1,120 @@
+<!--
+<div class="centered-page">
+    <h1 class="page-title">Todo List with Signals</h1>
+    <ul>
+        <li *ngFor="let todo of todos()">
+            {{ todo.title }}
+        </li>
+    </ul>
+</div>
+
+ fare a lista usando il @for
+
+<div class="centered-page">
+    <h1 class="page-title">Todo List with Signals</h1>
+    <input type="text" placeholder="aggiungi un todo item" 
+    #inputRef/>
+    <ul>
+            @for (todo of todos(); track todo.id) {
+                <li>{{ todo.title }}</li>
+            }
+    </ul>
+</div>
+implementare un metodo per aggiungere delle todo alla pressione
+ del tasto invio
+
+ <div class="centered-page">
+    <h1 class="page-title">Todo List with Signals</h1>
+    <input type="text" placeholder="aggiungi un todo item" 
+    #inputRef (keydown.enter)="addTodo(inputRef)"/>
+    <ul>
+            @for (todo of todos(); track todo.id) {
+                <li>{{ todo.title }}</li>
+            }
+    </ul>
+</div>
+
+ aggiungere l'icona elimina e implementare metodo elimina
+
+ <div class="centered-page">
+    <h1 class="page-title">Todo List with Signals</h1>
+    <input 
+    type="text"
+    class="input input-primary" 
+    placeholder="aggiungi un todo item" 
+    #inputRef (keydown.enter)="addTodo(inputRef)"/>
+    <hr class="my-4 text-blue-500"/>
+    <ul>
+            @for (todo of todos(); track todo.id) {
+                <li class="flex justify-between">
+                    <span>{{ todo.title }}</span> 
+                  <button (click)="deleteTodo(todo.id)">
+                      ❌
+                  </button>
+                </li>
+            }
+    </ul>
+</div>
+
+
+aggiungere una checkbox e una line-through per sbarrare il testo se la checkbox
+è checkkata
+
+<div class="centered-page">
+    <h1 class="page-title">Todo List with Signals</h1>
+    <input 
+    type="text"
+    class="input input-primary" 
+    placeholder="aggiungi un todo item" 
+    #inputRef (keydown.enter)="addTodo(inputRef)"/>
+    <hr class="my-4 text-blue-500"/>
+    <ul>
+            @for (todo of todos(); track todo.id) {
+                <li class="flex justify-between">
+                    <div class="flex items-center gap-4">
+                        <input type="checkbox" 
+                        [checked]="todo.completed"
+                        (change)="toggleTodo(todo)" />
+                        <span [ngClass]="{'line-through' : todo.completed}">{{ todo.title }}</span> 
+                    </div>
+                    
+                  <button (click)="deleteTodo(todo.id)">
+                    
+                      ❌
+                  </button>
+                </li>
+            }
+    </ul>
+</div>
+
+
+fare due placeholder con la quantità dei todo completati e quelli rimanenti-->
+
+<div class="centered-page">
+    <h1 class="page-title">Todo List with Signals</h1>
+    <div>
+        todo completati: {{ todosCompleted() }} | todo rimanenti: {{ remainingTodos() }}
+    </div>
+    <input 
+    type="text"
+    class="input input-primary" 
+    placeholder="aggiungi un todo item" 
+    #inputRef (keydown.enter)="addTodo(inputRef)"/>
+    <hr class="my-4 text-blue-500"/>
+    <ul>
+            @for (todo of todos(); track todo.id) {
+                <li class="flex justify-between">
+                    <div class="flex items-center gap-4">
+                        <input type="checkbox" 
+                        [checked]="todo.completed"
+                        (change)="toggleTodo(todo)" />
+                        <span [ngClass]="{'line-through' : todo.completed}">{{ todo.title }}</span> 
+                    </div>
+                    
+                  <button (click)="deleteTodo(todo.id)">
+                      ❌
+                  </button>
+                </li>
+            }
+    </ul>
+</div>

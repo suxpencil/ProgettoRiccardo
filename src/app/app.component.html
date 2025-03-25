@@ -1,2 +1,58 @@
-<h1 class="text-4xl text-blue-500">Hello world!</h1>
-<router-outlet />
+
+<app-phone [src]="imageUrl" [alt]="alt" showAlt size="xl"></app-phone>
+
+<app-timeline [timelineItems]="timelineItems" vertical></app-timeline>
+
+<div class="flex flex-col gap-4">  <!-- gap-4: mi spazia tutti gli elementi di 16 px tra loro  -->
+
+    <app-alert-figo 
+(onDeny)="onDenyHandler()"
+(onAccept)="onAcceptHandler()"
+[variant]=""
+
+>
+
+<div class="flex flex-col gap-4">
+
+    <span>Sei sicuro di voler procedere?</span>
+    <strong>Questa azione non può essere annullata</strong>
+    <em>Luigi</em>
+
+</div>        
+
+</app-alert-figo>
+<app-alert-figo 
+(onDeny)="onDenyHandler()"
+(onAccept)="onAcceptHandler()"
+[variant]="'info'"
+
+>
+
+<div class="flex flex-col gap-4">
+
+    <button class="btn btn-sm">Clicca qui</button>
+    <button class="btn btn-sm btn-primary">Clicca qui</button>
+
+</div>
+
+    
+
+</app-alert-figo>
+<app-alert-figo 
+(onDeny)="onDenyHandler()"
+(onAccept)="onAcceptHandler()"
+[variant]="'success'"
+
+></app-alert-figo>
+<app-alert-figo 
+(onDeny)="onDenyHandler()"
+(onAccept)="onAcceptHandler()"
+[variant]="'error'"
+
+></app-alert-figo>
+
+</div>
+
+
+
+ <router-outlet />

@@ -1,0 +1,13 @@
+
+<div class="h-full w-full p-6 flex gìflex-col gap-4">
+    <h1 class="page-title">Todo Edit</h1>
+    <input 
+    type="text"
+    class="input input-primary" 
+    placeholder="modifica un todo item" 
+    #inputRef
+    [(ngModel)]="des"
+    />
+    <button class="btn btn-primary" (click)="apply()">applica</button>
+</div>
+

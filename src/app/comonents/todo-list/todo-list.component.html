@@ -91,10 +91,10 @@ aggiungere una checkbox e una line-through per sbarrare il testo se la checkbox
 fare due placeholder con la quantità dei todo completati e quelli rimanenti-->
 
 <div class="centered-page">
-    <h1 class="page-title">Todo List with Signals</h1>
+    <!-- <h1 class="page-title">Todo List with Signals</h1>
     <div>
         todo completati: {{ todosCompleted() }} | todo rimanenti: {{ remainingTodos() }}
-    </div>
+    </div> -->
     <input 
     type="text"
     class="input input-primary" 
@@ -102,7 +102,7 @@ fare due placeholder con la quantità dei todo completati e quelli rimanenti-->
     #inputRef (keydown.enter)="addTodo(inputRef)"/>
     <hr class="my-4 text-blue-500"/>
     <ul>
-            @for (todo of todos(); track todo.id) {
+            @for (todo of todoService.todos(); track todo.id) {
                 <li class="flex justify-between">
                     <div class="flex items-center gap-4">
                         <input type="checkbox" 
@@ -111,9 +111,12 @@ fare due placeholder con la quantità dei todo completati e quelli rimanenti-->
                         <span [ngClass]="{'line-through' : todo.completed}">{{ todo.title }}</span> 
                     </div>
                     
-                  <button (click)="deleteTodo(todo.id)">
+                  <button class="cursor-pointer" (click)="deleteTodo(todo.id)">
                       ❌
                   </button>
+                  <button class="cursor-pointer" (click)="editTodo(todo)">
+                      ✏️
+                    </button>
                 </li>
             }
     </ul>

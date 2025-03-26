@@ -1,17 +1,28 @@
-import { Component, computed, effect, signal } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { Component, computed, effect, inject, OnInit, signal } from "@angular/core";
+import { Router, RouterOutlet } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { PhoneComponent } from "./comonents/phone/phone.component";
 import { TimelineComponent, TimelineItem } from "./comonents/timeline/timeline.component";
 import { AlertFigoComponent } from "./comonents/alert-figo/alert-figo.component";
+import TodoListComponent from "./comonents/todo-list/todo-list.component";
 
 @Component({
   selector: "app-root",
-  imports: [RouterOutlet, CommonModule, PhoneComponent, TimelineComponent, AlertFigoComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+],
   templateUrl: "./app.component.html",
   styles: [],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  private readonly router = inject(Router)
+
+  ngOnInit(): void {
+    //this.router.navigateByUrl('todo-list');
+    this.router.navigateByUrl('reactive-todo-list');
+  }
 
     imageUrl= "https://img.daisyui.com/images/stock/453966.webp"
     alt ="wallpaper"

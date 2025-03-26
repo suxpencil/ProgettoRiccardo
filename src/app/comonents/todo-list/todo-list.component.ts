@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, Inject, OnInit, signal } from '@angular/core';
+import { TodoService } from '../../services/todo-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list',
@@ -7,16 +9,35 @@ import { Component, computed, signal } from '@angular/core';
   templateUrl: './todo-list.component.html',
   styles: ``
 })
-export class TodoListComponent {
+export default class TodoListComponent implements OnInit {
 
-  todosCompleted = computed(() => this.todos().filter(todo => todo.completed).length);
+  
 
-  remainingTodos = computed(() => this.todos().filter(todo => !todo.completed).length);
+  readonly todoService= inject(TodoService);
 
- todos = signal<Todo[]>([
-    {id: 1, title: "Todo 1", completed: false},
-    {id: 2, title: "Todo 2", completed: false},
-  ]);
+  private readonly _router = inject(Router);
+
+  // todosCompleted = computed(() => this.todos().filter(todo => todo.completed).length);
+
+  // remainingTodos = computed(() => this.todos().filter(todo => !todo.completed).length);
+
+ 
+
+
+  ngOnInit() {
+    
+    const element = this.todoService.getItem();
+    if(element){
+      console.log('element: ', element);
+      const todos = this.todoService.todos();
+      todos.forEach(todo => {
+        if(todo.id === element.id){
+          todo.title = element.title;
+        }
+      });
+    }
+
+  }  
 
 
   addTodo (input: HTMLInputElement) {
@@ -26,17 +47,23 @@ export class TodoListComponent {
         title: input.value,
         completed: false
       }
-      this.todos.update(currentTodos => [...currentTodos, newTodo]);
+      this.todoService.todos.update(currentTodos => [...currentTodos, newTodo]);
       input.value = "";
     }
   }
 
+  editTodo(todo: Todo): void{
+    console.log(todo);
+    this.todoService.setItem(todo);
+    this._router.navigateByUrl('todo-edit');
+  }
+
   deleteTodo (id: number) {
-    this.todos.update(currentTodos => currentTodos.filter(todo => todo.id !== id));
+    this.todoService.todos.update(currentTodos => currentTodos.filter(todo => todo.id !== id));
   }
 
   toggleTodo (todoToToggle: Todo) {
-    this.todos.update((todos)=>
+    this.todoService.todos.update((todos)=>
     todos.map((todo)=>
     todo.id === todoToToggle.id
        ? {...todo, completed: !todo.completed}
@@ -45,7 +72,7 @@ export class TodoListComponent {
   }
 }
 
-interface Todo {
+export interface Todo {
   id: number;
   title: string;
   completed: boolean;

@@ -1,0 +1,27 @@
+<div class="centered-page">
+    <input 
+    type="text"
+    class="input input-primary" 
+    placeholder="aggiungi un todo item" 
+    #inputRef (keydown.enter)="addTodo(inputRef)"/>
+    <hr class="my-4 text-blue-500"/>
+    <ul>
+            @for (todo of (todoService.todos$ | async); track todo.id) {
+                <li class="flex justify-between">
+                    <div class="flex items-center gap-4">
+                        <input type="checkbox" 
+                        [checked]="todo.completed"
+                        (change)="toggleTodo(todo)" />
+                        <span [ngClass]="{'line-through' : todo.completed}">{{ todo.title }}</span> 
+                    </div>
+                    
+                  <button class="cursor-pointer" (click)="deleteTodo(todo.id)">
+                      ❌
+                  </button>
+                  <button class="cursor-pointer" (click)="editTodo(todo)">
+                      ✏️
+                    </button>
+                </li>
+            }
+    </ul>
+</div>

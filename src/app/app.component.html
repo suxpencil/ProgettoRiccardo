@@ -1,9 +1,9 @@
 
-<app-phone [src]="imageUrl" [alt]="alt" showAlt size="xl"></app-phone>
+<!-- <app-phone [src]="imageUrl" [alt]="alt" showAlt size="xl"></app-phone>
 
 <app-timeline [timelineItems]="timelineItems" vertical></app-timeline>
 
-<div class="flex flex-col gap-4">  <!-- gap-4: mi spazia tutti gli elementi di 16 px tra loro  -->
+<div class="flex flex-col gap-4">  <!-- gap-4: mi spazia tutti gli elementi di 16 px tra loro  
 
     <app-alert-figo 
 (onDeny)="onDenyHandler()"
@@ -49,10 +49,16 @@
 (onAccept)="onAcceptHandler()"
 [variant]="'error'"
 
-></app-alert-figo>
+></app-alert-figo> 
+
+</div>-->
+
+<div class="centered page">
+
+    <router-outlet />
 
 </div>
 
 
 
- <router-outlet />
+ 

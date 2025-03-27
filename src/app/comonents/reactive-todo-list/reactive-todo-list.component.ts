@@ -1,9 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject, OnDestroy, OnInit, signal } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { bufferCount, filter, flatMap, map, mergeMap, reduce, Subscription } from "rxjs";
 import { TodoService } from "../../services/todo-service.service";
 import { Todo } from "../todo-list/todo-list.component";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-reactive-todo-list",
@@ -16,11 +17,21 @@ export default class ReactiveTodoListComponent implements OnInit {
 
   private readonly _router = inject(Router);
 
+  private readonly _route = inject(ActivatedRoute);
+
+  private readonly HttplCLient = inject(HttpClient);
+
   private _sub: Subscription[] = [];
 
 
 
   ngOnInit(): void {
+
+    this._route.params.subscribe(param => {
+      console.log('parametri', param);
+    })
+
+    this.HttplCLient.get('https://jsonplaceholder.typicode.com/todos/1').subscribe(response => console.log('risposta', response));
    
     this.todoService.arrayNumbers$
     .pipe(

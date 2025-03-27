@@ -1,4 +1,3 @@
-
 <!-- <app-phone [src]="imageUrl" [alt]="alt" showAlt size="xl"></app-phone>
 
 <app-timeline [timelineItems]="timelineItems" vertical></app-timeline>
@@ -51,14 +50,39 @@
 
 ></app-alert-figo> 
 
-</div>-->
-
-<div class="centered page">
-
-    <router-outlet />
-
 </div>
 
+accordion super customizzabile
 
+<div class="my-4">
+  <h1>Accordion 1</h1>
+  <app-accordion-item groupName="accordion-1" title="oggetto1">
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab, quia!
+  </app-accordion-item>
+  <app-accordion-item groupName="accordion-1" title="oggetto2" selected>
+    <button class="btn btn-secondary">Clicca qui</button>
+  </app-accordion-item>
+  <app-accordion-item groupName="accordion-1" title="oggetto3">
+    <input type="checkbox" />
+  </app-accordion-item>
+</div>
+<div class="my-4"> 
+  <h1>Accordion 2</h1>
+  <app-accordion-item groupName = "accordion-2" title="oggetto1" selected>
+    <app-alert-figo></app-alert-figo>
+  </app-accordion-item>
+  <app-accordion-item groupName = "accordion-2" title="oggetto2" ></app-accordion-item>
+  <app-accordion-item groupName = "accordion-2" title="oggetto3"></app-accordion-item>
+</div> 
 
- 
+dropdown customizzata
+
+<app-dropdown 
+[items]="dropdpwnItems" 
+(onClickElement)="onClickElementHandler($event)"
+[position]="'right'"
+></app-dropdown> -->
+
+<div class="centered page">
+ <!-- <router-outlet /> --> 
+</div>
